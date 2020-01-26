@@ -5,7 +5,7 @@ import selectors from "./selectors";
 const newsApi = process.env.NODE_ENV === 'development' ? require('./api.mock').default : require('./api').default;
 
 
-const DELAY_BUTTON_VISIBILITY = 60000; // Change to 900000 for 15 minutes delay. Now is set to 1 minutes
+const DELAY_BUTTON_VISIBILITY = 6000; // Change to 900000 for 15 minutes delay. Now is set to 1 minutes
 const FAKE_API_DELAY = 1000; // Simulate API call delay
 
 function* initSaga() {
@@ -28,7 +28,7 @@ function* watchSetUpdateFeeds() {
         yield put(actions.setButtonVisibility({ detail: false }));
         yield put(actions.setLoading({ loading: true }));
         yield delay(FAKE_API_DELAY);
-        const data = yield call(newsApi.getNews);
+        const data = yield call(newsApi.updateNews);
         yield put(actions.setFeedData(data));
 
         yield put(actions.setLoading( { loading: false }));
@@ -51,7 +51,7 @@ function* handleFilter() {
             );
             yield put(actions.setFilterFeeds(filteredArray));
         } else {
-            const data = yield call(newsApi.getNews);
+            const data = yield call(newsApi.updateNews);
             yield put(actions.setFeedData(data));
         }
 
