@@ -1,0 +1,48 @@
+@import "../common/colours";
+
+.tile {
+  display: flex;
+  flex: 1;
+  flex-flow: column;
+}
+
+.tile__wrapper {
+  display: flex;
+  flex: 1;
+  flex-flow: column;
+  margin: 8px;
+
+  &__title {
+    display: flex;
+    flex: 1;
+    justify-content: flex-start;
+    color: $gray-dark;
+    font-family: MuseoSans;
+    line-height: 1.5;
+    letter-spacing: -.6px;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    font-weight: bold;
+
+  }
+
+  &__content {
+    display: flex;
+    flex: 1;
+    justify-content: flex-start;
+    color: $gray;
+    font-size: 1rem;
+    letter-spacing: -.05rem;
+    line-height: 1.56;
+  }
+}
+
+.tile__image {
+  height: 200px;
+  box-shadow: 5px 5px $gray-lighter;
+  margin-bottom: 20px;
+  img {
+    height: inherit;
+    width: 100%;
+  }
+}

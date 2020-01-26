@@ -1,21 +1,72 @@
-import {  delay, takeLatest, all, put } from 'redux-saga/effects';
+import {  delay, takeLatest, all, call, put, select } from 'redux-saga/effects';
 import types from './types';
 import actions from './actions';
+import selectors from "./selectors";
+const newsApi = process.env.NODE_ENV === 'development' ? require('./api.mock').default : require('./api').default;
 
-function* watchInitialize() {
-    yield takeLatest(types.SET_REFRESH_STATE, function* (state) {
-        /*
-        In questa porzione di codice verranno richiamate le chiamate api e populato lo store [data]
-        Terminato verrà chiamata la action START_COUNT_DOWN e lo stato ritorna in pending.
-         */
-        delay(500);
-        window.console.log('The state has changed');
+const DELAY_BUTTON_VISIBILITY = 1000;
+const FAKE_API_DELAY = 1000;
+
+function* initSaga() {
+    // set loading value to true ---> start api call.
+    yield put(actions.setLoading({ loading: true }));
+    yield delay(FAKE_API_DELAY);
+    const data = yield call(newsApi.getNews);
+    yield put(actions.setFeedData(data));
+
+    yield put(actions.setLoading( { loading: false }));
+
+    // This is the handler for the visibility of the button.
+    yield delay(DELAY_BUTTON_VISIBILITY);
+    yield put(actions.setButtonVisibility({ detail: true }))
+
+}
+
+function* watchSetUpdateFeeds() {
+    yield takeLatest(types.REFRESH_FEEDS, function*() {
+        window.console.log('Nuova chiamata all API');
+        yield put(actions.setButtonVisibility({ detail: false }));
+        yield put(actions.setLoading({ loading: true }));
+        yield delay(FAKE_API_DELAY);
+        const data = yield call(newsApi.getNews);
+        yield put(actions.setFeedData(data));
+
+        yield put(actions.setLoading( { loading: false }));
+
+        yield delay(5000);
+        yield put(actions.setButtonVisibility({ detail: true }))
+    })
+}
+
+function* handleFilter() {
+    yield takeLatest(types.FILTER_FEEDS, function*(action ) {
+        const { detail } = action.payload;
+        console.log(detail);
+        if (detail !== '') {
+            const feeds = yield select(selectors.getFeeds);
+
+            const filteredArray = yield feeds.feeds.filter(
+                feed =>
+                    feed.title.toLowerCase().includes(detail) ||
+                    feed.content.toLowerCase().includes(detail)
+            );
+            console.log(filteredArray);
+            yield put(actions.setFilterFeeds(filteredArray));
+        } else {
+            yield put(actions.setFeedData());
+        }
+
+
     })
 }
 
 
+
+
 export default function* rootSaga() {
     yield all([
-        watchInitialize(),
+        initSaga(),
+        watchSetUpdateFeeds(),
+        handleFilter(),
     ])
 }
