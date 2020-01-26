@@ -44,6 +44,15 @@ body {
     flex-flow: column;
   }
 
+  &__no-items {
+    display: flex;
+    flex: 1;
+    flex-flow: column;
+    color: $gray-dark;
+    font-size: 1.20rem;
+    margin: 2rem 1rem;
+  }
+
   &__refresh {
     display: flex;
     flex: 1;

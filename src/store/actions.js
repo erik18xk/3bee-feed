@@ -5,7 +5,7 @@ const _changeState = createAction(types.SET_REFRESH_STATE);
 const changeState = status => _changeState({ status });
 
 const _setFilterFeeds = createAction(types.SET_FILTER_FEEDS);
-const setFilterFeeds = detail => _setFilterFeeds({ detail });
+const setFilterFeeds = feeds => _setFilterFeeds({ feeds });
 
 const _filterFeeds = createAction(types.FILTER_FEEDS);
 const filterFeeds = detail => _filterFeeds( { detail });

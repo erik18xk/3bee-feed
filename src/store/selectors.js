@@ -1,4 +1,3 @@
-import types from './types';
 
 const getFeeds = state => state.feeds || {};
 

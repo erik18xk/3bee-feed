@@ -4,8 +4,9 @@ import actions from './actions';
 import selectors from "./selectors";
 const newsApi = process.env.NODE_ENV === 'development' ? require('./api.mock').default : require('./api').default;
 
-const DELAY_BUTTON_VISIBILITY = 1000;
-const FAKE_API_DELAY = 1000;
+
+const DELAY_BUTTON_VISIBILITY = 60000; // Change to 900000 for 15 minutes delay. Now is set to 1 minutes
+const FAKE_API_DELAY = 1000; // Simulate API call delay
 
 function* initSaga() {
     // set loading value to true ---> start api call.
@@ -24,7 +25,6 @@ function* initSaga() {
 
 function* watchSetUpdateFeeds() {
     yield takeLatest(types.REFRESH_FEEDS, function*() {
-        window.console.log('Nuova chiamata all API');
         yield put(actions.setButtonVisibility({ detail: false }));
         yield put(actions.setLoading({ loading: true }));
         yield delay(FAKE_API_DELAY);
@@ -33,7 +33,7 @@ function* watchSetUpdateFeeds() {
 
         yield put(actions.setLoading( { loading: false }));
 
-        yield delay(5000);
+        yield delay(DELAY_BUTTON_VISIBILITY);
         yield put(actions.setButtonVisibility({ detail: true }))
     })
 }
@@ -41,7 +41,6 @@ function* watchSetUpdateFeeds() {
 function* handleFilter() {
     yield takeLatest(types.FILTER_FEEDS, function*(action ) {
         const { detail } = action.payload;
-        console.log(detail);
         if (detail !== '') {
             const feeds = yield select(selectors.getFeeds);
 
@@ -50,10 +49,10 @@ function* handleFilter() {
                     feed.title.toLowerCase().includes(detail) ||
                     feed.content.toLowerCase().includes(detail)
             );
-            console.log(filteredArray);
             yield put(actions.setFilterFeeds(filteredArray));
         } else {
-            yield put(actions.setFeedData());
+            const data = yield call(newsApi.getNews);
+            yield put(actions.setFeedData(data));
         }
 
 

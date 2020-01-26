@@ -7,8 +7,7 @@ import '../styles/components/tile.scss';
 class Tile extends Component {
 
     render() {
-        const { title, content, image } = this.props.data;
-        console.log(image);
+        const { title, content, image, id } = this.props.data;
         return (
             <div className="tile">
                 <div className="tile__wrapper">
@@ -18,7 +17,7 @@ class Tile extends Component {
                     </div>
                 </div>
                 <div className="tile__image">
-                    <img src={image} />
+                    <img src={image} alt={id}/>
                 </div>
             </div>
         );

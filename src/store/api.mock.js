@@ -3,13 +3,13 @@ const news = {
     "feeds": [
         {
             "id": "5875fec344607288628a9249",
-            "title": "3BEE feed",
+            "title": "3BEE feed example",
             "content": "Questo è un esempio di feed 3bee",
             "image": "https://www.lifegate.it/app/uploads/Ape-su-un-fiore.jpg"
         },
         {
             "id": "587601d344607dsad9628a9249",
-            "title": "3bee feed",
+            "title": "Another 3BEE feed example",
             "content": "Questo è un altro esempio di feed 3bee",
             "image": "https://www.3bee.it/wp-content/uploads/2019/11/Immagine-comunicato-stampa-Nutribees_senza-testo_Tavola-disegno-1-copia-2-2-1200x769.jpg"
         },

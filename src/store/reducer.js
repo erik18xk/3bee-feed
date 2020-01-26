@@ -20,7 +20,6 @@ const reducers = (state = initialState(), action) => {
                 refreshFeed: payload.status,
             };
         case types.SET_FEED_DATA:
-            console.log(data);
             return {
                 ...state,
                 feeds: {
@@ -44,6 +43,13 @@ const reducers = (state = initialState(), action) => {
         case types.FILTER_FEEDS:
             return {
                 ...state,
+            };
+        case types.SET_FILTER_FEEDS:
+            return {
+                ...state,
+                feeds: {
+                    ...data,
+                }
             };
 
         default:
