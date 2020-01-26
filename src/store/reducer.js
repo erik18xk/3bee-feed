@@ -1,13 +1,13 @@
 import types from './types';
 
 export const initialState = () => ({
-    refreshFeed: false,
     isButtonVisible: false,
+    feeds: {},
 });
 
 const reducers = (state = initialState(), action) => {
     const { payload } = action;
-    window.console.log(payload);
+    const data = action && action.payload;
     switch (action.type) {
         case types.INITIALIZE:
             return {
@@ -19,11 +19,42 @@ const reducers = (state = initialState(), action) => {
                 ...state,
                 refreshFeed: payload.status,
             };
+        case types.SET_FEED_DATA:
+            return {
+                ...state,
+                feeds: {
+                    ...state.feeds, ...data
+                }
+            };
+        case types.SET_LOADING:
+            return {
+                ...state,
+                loading: !!data.loading
+            };
+        case types.SET_BUTTON_VISIBILITY:
+            return {
+                ...state,
+                isButtonVisible: data.detail
+            };
+        case types.REFRESH_FEEDS:
+            return {
+                ...state,
+            };
+        case types.FILTER_FEEDS:
+            return {
+                ...state,
+            };
+        case types.SET_FILTER_FEEDS:
+            return {
+                ...state,
+                feeds: {
+                    ...data,
+                }
+            };
+
         default:
             return initialState();
     }
 };
 
 export default reducers;
-
-<Button className = "button ${this.props.isButtonVisible ? '--active' : '' }"></Button>
