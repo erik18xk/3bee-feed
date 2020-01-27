@@ -4,7 +4,7 @@ const news = {
             "id": "5875fec344607288628a9249",
             "title": "3BEE feed example",
             "content": "Questo è un esempio di feed 3bee",
-            "image": "https://www.lifegate.it/app/uploads/Ape-su-un-fiore.jpg"
+            "image": "https://www.3bee.it/images/logo.png"
         },
         {
             "id": "587601d344607dsad9628a9249",

@@ -1,4 +1,5 @@
 @import "./styles/common/colours";
+@import "./styles/common/mixins/breakpoints.scss";
 
 body {
   margin: 0;
@@ -9,6 +10,16 @@ body {
   flex-flow: column;
   justify-content: center;
 
+  @include media-breakpoint-up(md) {
+    margin: 0 2rem;
+    justify-content: center;
+  }
+
+  @include media-breakpoint-up(lg) {
+    max-width: 905px;
+    margin: 0 auto;
+  }
+
   &__search {
     display: flex;
     flex: 1;
@@ -16,6 +27,10 @@ body {
     opacity: 0.9;
     min-height: 110px;
     flex-flow: row;
+
+    @include media-breakpoint-up(md) {
+      background-color: $white;
+    }
 
     &__input {
       display: flex;
@@ -32,8 +47,19 @@ body {
       color: $white;
       font-weight: bold;
 
+      @include media-breakpoint-up(md) {
+        background-color: $white;
+        border: 2px solid $brand-secondary;
+        color: $brand-secondary;
+      }
+
       &::placeholder {
         color: $white;
+
+        @include media-breakpoint-up(md) {
+          color: $brand-secondary;
+        }
+
       }
     }
   }
@@ -42,6 +68,13 @@ body {
     display: flex;
     flex: 1;
     flex-flow: column;
+
+    @include media-breakpoint-up(md) {
+      display: flex;
+      flex-flow: wrap;
+      flex-direction: row;
+      justify-content: space-around;
+    }
   }
 
   &__no-items {
@@ -71,6 +104,14 @@ body {
       border-radius: 5rem;
       font-weight: bold;
       outline: none;
+
+      @include media-breakpoint-up(lg) {
+        border-radius: 0;
+        background-color: $brand-primary;
+        color: white;
+        max-width: 400px;
+        font-size: 1.20rem;
+      }
 
       &--visible {
         display: flex;
