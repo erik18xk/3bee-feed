@@ -79,6 +79,7 @@
   &__front {
     display: flex;
     backface-visibility: hidden;
+    min-width: 100%;
 
     @include media-breakpoint-up(md) {
       border-radius: 20px;
