@@ -1,9 +1,22 @@
 @import "../common/colours";
+@import "../common/mixins/breakpoints";
 
 .tile {
   display: flex;
   flex: 1;
   flex-flow: column;
+
+  @include media-breakpoint-up(md) {
+    display: flex;
+    flex: 1;
+    margin: 10px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    width: 430px;
+    max-width: 430px;
+  }
+
 }
 
 .tile__wrapper {
@@ -23,6 +36,9 @@
     font-size: 1.2rem;
     text-transform: uppercase;
     font-weight: bold;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 
   }
 
@@ -34,13 +50,26 @@
     font-size: 1rem;
     letter-spacing: -.05rem;
     line-height: 1.56;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
   }
 }
 
 .tile__image {
-  height: 200px;
-  box-shadow: 5px 5px $gray-lighter;
+  height: 311px;
+  box-shadow: 7px 8px $gray-lighter;
   margin-bottom: 20px;
+
+  @include media-breakpoint-up(md) {
+    height: 250px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    height: 200px;
+  }
+
   img {
     height: inherit;
     width: 100%;
