@@ -2,6 +2,8 @@ import {  delay, takeLatest, all, call, put, select } from 'redux-saga/effects';
 import types from './types';
 import actions from './actions';
 import selectors from "./selectors";
+
+// For use real api call change process.env.NODE_ENV === 'development' into process.env.NODE_ENV !== 'development'
 const newsApi = process.env.NODE_ENV === 'development' ? require('./api.mock').default : require('./api').default;
 
 
