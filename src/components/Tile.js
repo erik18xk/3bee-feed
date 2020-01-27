@@ -17,7 +17,12 @@ class Tile extends Component {
                     </div>
                 </div>
                 <div className="tile__image">
-                    <img src={image} alt={id}/>
+                    <div className="tile__image__front">
+                        <img src={image} alt={id}/>
+                    </div>
+                    <div className="tile__image__back">
+                        <p> Questa è una piccola descrizione mockata della card. Tappa fuori o esci per tornare all'immagine. </p>
+                    </div>
                 </div>
             </div>
         );
