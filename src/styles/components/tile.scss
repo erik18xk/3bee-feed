@@ -60,27 +60,35 @@
   display: flex;
   transform-style: preserve-3d;
   transition: all 0.5s ease;
-  height: 200px;
+  max-height: 311px;
+  margin-bottom: 20px;
+  flex: 1 0 400px;
 
-  &:hover {
-    transform: rotateY(180deg);
+
+  @include media-breakpoint-up(md) {
+    max-height: 250px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    &:hover {
+      transform: rotateY(180deg);
+    }
+    max-height: 200px;
   }
 
   &__front {
-    position: absolute;
-    border-radius: 20px;
-    height: 311px;
-    box-shadow: 7px 8px $gray-lighter;
-    margin-bottom: 20px;
+    display: flex;
     backface-visibility: hidden;
 
     @include media-breakpoint-up(md) {
       border-radius: 20px;
       height: 250px;
+      box-shadow: 7px 8px $gray-lighter;
     }
 
     @include media-breakpoint-up(lg) {
       height: 200px;
+      position: absolute;
     }
   }
 
@@ -89,7 +97,7 @@
     flex: 1;
     position: absolute;
     backface-visibility: hidden;
-    height: inherit;
+    height: 200px;
     width: 100%;
     transform: rotateY(180deg);
     box-shadow: 7px 8px $gray-lighter;
